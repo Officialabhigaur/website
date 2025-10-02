@@ -80,10 +80,9 @@ export const MovingBorder = ({
   duration?: number;
   rx?: string;
   ry?: string;
-  [key: string]: any;
-}) => {
+} & React.SVGProps<SVGRectElement>) => {
   const pathRef = useRef<SVGRectElement | null>(null);
-  const progress = useMotionValue<number>(0);
+  const progress = useMotionValue(0);
 
   useAnimationFrame((time: number) => {
     const length = pathRef.current?.getTotalLength();
@@ -93,14 +92,8 @@ export const MovingBorder = ({
     }
   });
 
-  const x = useTransform(
-    progress,
-    (val) => pathRef.current?.getPointAtLength(val).x,
-  );
-  const y = useTransform(
-    progress,
-    (val) => pathRef.current?.getPointAtLength(val).y,
-  );
+  const x = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).x ?? 0);
+  const y = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).y ?? 0);
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 
@@ -114,14 +107,7 @@ export const MovingBorder = ({
         height="100%"
         {...otherProps}
       >
-        <rect
-          fill="none"
-          width="100%"
-          height="100%"
-          rx={rx}
-          ry={ry}
-          ref={pathRef}
-        />
+        <rect fill="none" width="100%" height="100%" rx={rx} ry={ry} ref={pathRef} />
       </svg>
       <motion.div
         style={{
@@ -137,3 +123,4 @@ export const MovingBorder = ({
     </>
   );
 };
+
