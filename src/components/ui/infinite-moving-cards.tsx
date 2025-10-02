@@ -24,12 +24,18 @@ export const InfiniteMovingCards = ({
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    addAnimation();
+    addAnimation(containerRef, scrollerRef, getDirection, getSpeed, setStart);
   }, []);
 
-  
   const [start, setStart] = useState(false);
-  function addAnimation() {
+
+  function addAnimation(
+    containerRef: React.RefObject<HTMLDivElement | null>,
+    scrollerRef: React.RefObject<HTMLDivElement | null>,
+    getDirection: () => void,
+    getSpeed: () => void,
+    setStart: React.Dispatch<React.SetStateAction<boolean>>
+  ) {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
@@ -45,17 +51,18 @@ export const InfiniteMovingCards = ({
       setStart(true);
     }
   }
+
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
         containerRef.current.style.setProperty(
           "--animation-direction",
-          "forwards",
+          "forwards"
         );
       } else {
         containerRef.current.style.setProperty(
           "--animation-direction",
-          "reverse",
+          "reverse"
         );
       }
     }
@@ -76,7 +83,7 @@ export const InfiniteMovingCards = ({
       ref={containerRef}
       className={cn(
         "scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] ",
-        className,
+        className
       )}
     >
       <ul
@@ -84,7 +91,7 @@ export const InfiniteMovingCards = ({
         className={cn(
           "flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4",
           start && "animate-scroll",
-          pauseOnHover && "hover:[animation-play-state:paused]",
+          pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
         {items.map((item) => (

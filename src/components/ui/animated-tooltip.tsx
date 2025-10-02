@@ -1,7 +1,8 @@
 "use client";
 
 import React, {  useRef } from "react";
-import { useTransform, useMotionValue, useSpring } from "motion/react";
+import {  useMotionValue } from "motion/react";
+import Image from "next/image";
 
 
 export const AnimatedTooltip = ({
@@ -14,28 +15,43 @@ export const AnimatedTooltip = ({
     image: string;
   }[];
 }) => {
-  const springConfig = { stiffness: 100, damping: 15 };
   const x = useMotionValue(0);
   const animationFrameRef = useRef<number | null>(null);
 
   
 
-  const handleMouseMove = (event: any) => {
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
+  // const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+  //   if (animationFrameRef.current) {
+  //     cancelAnimationFrame(animationFrameRef.current);
+  //   }
 
-    animationFrameRef.current = requestAnimationFrame(() => {
-      const halfWidth = event.target.offsetWidth / 2;
-      x.set(event.nativeEvent.offsetX - halfWidth);
-    });
-  };
+  //   animationFrameRef.current = requestAnimationFrame(() => {
+  //     const halfWidth = event.currentTarget.offsetWidth / 2;
+  //     x.set(event.nativeEvent.offsetX - halfWidth);
+  //   });
+  // };
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+  if (animationFrameRef.current) {
+    cancelAnimationFrame(animationFrameRef.current);
+  }
+
+  // store what you need before requestAnimationFrame
+  const { offsetWidth } = event.currentTarget;
+  const { offsetX } = event.nativeEvent;
+
+  animationFrameRef.current = requestAnimationFrame(() => {
+    const halfWidth = offsetWidth / 2;
+    x.set(offsetX - halfWidth);
+  });
+};
+
 
   return (
     <>
       {items.map((item) => (
         <div className="group relative -mr-4 " key={item.name}>
-          <img
+          <Image
             onMouseMove={handleMouseMove}
             height={100}
             width={100}
