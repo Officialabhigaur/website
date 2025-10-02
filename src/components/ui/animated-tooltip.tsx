@@ -1,13 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import {
-  motion,
-  useTransform,
-  AnimatePresence,
-  useMotionValue,
-  useSpring,
-} from "motion/react";
+import { useTransform, useMotionValue, useSpring } from "motion/react";
+
 
 export const AnimatedTooltip = ({
   items,
@@ -19,17 +14,12 @@ export const AnimatedTooltip = ({
     image: string;
   }[];
 }) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const springConfig = { stiffness: 100, damping: 15 };
   const x = useMotionValue(0);
   const animationFrameRef = useRef<number | null>(null);
 
   const rotate = useSpring(
     useTransform(x, [-100, 100], [-45, 45]),
-    springConfig
-  );
-  const translateX = useSpring(
-    useTransform(x, [-100, 100], [-50, 50]),
     springConfig
   );
 
@@ -47,12 +37,7 @@ export const AnimatedTooltip = ({
   return (
     <>
       {items.map((item, idx) => (
-        <div
-          className="group relative -mr-4 "
-          key={item.name}
-          onMouseEnter={() => setHoveredIndex(item.id)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
+        <div className="group relative -mr-4 " key={item.name}>
           <img
             onMouseMove={handleMouseMove}
             height={100}

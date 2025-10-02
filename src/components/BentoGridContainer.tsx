@@ -1,16 +1,13 @@
-import { cn } from "@/lib/utils";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
 import {
   IconArrowWaveRightUp,
-  IconBoxAlignRightFilled,
-  IconBoxAlignTopLeft,
   IconClipboardCopy,
   IconFileBroken,
   IconSignature,
   IconTableColumn,
 } from "@tabler/icons-react";
-import { div } from "motion/react-client";
+
 
 export function BentoGridContainer() {
   return (
@@ -21,7 +18,7 @@ export function BentoGridContainer() {
         </h2>
         <p className="max-w-4xl mt-6 text-gray-600 text-lg  pl-4 sm:pl-0 mx-auto">
           At <span className="text-blue-900">AVR Services, </span>you're not
-          just learning-you're gaining the skills, confidence, and mentorship to{" "}
+          just learning-you're gaining the skills, confidence, and mentorship to
           <span className="text-blue-900">
             reinvent your career in the digital age.
           </span>
@@ -45,9 +42,7 @@ export function BentoGridContainer() {
     </div>
   );
 }
-const Skeleton = () => (
-  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
-);
+
 const items = [
   {
     title: "Certified Expert Trainers",
