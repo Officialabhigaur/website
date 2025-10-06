@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "AVR  Services",
   description: "AVR offers online & offline tech courses in Data Analytics, AI Data Science, Full-Stack Development, DSA, UI/UX 100% placement support with hands-on projects and expert guidance",
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({

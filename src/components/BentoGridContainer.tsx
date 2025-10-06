@@ -18,9 +18,8 @@ export function BentoGridContainer() {
         </h2>
         <p className="max-w-4xl mt-6 text-gray-600 text-lg  pl-4 sm:pl-0 mx-auto">
           At <span className="text-blue-900">AVR Services, </span>you&apos;re not
-          just learning-you&apos;re gaining the skills, confidence, and mentorship to
-          <span className="text-blue-900">
-            reinvent your career in the digital age.
+          just learning-you&apos;re gaining the skills, confidence, and mentorship to <span className="text-blue-900">
+             reinvent your career in the digital age.
           </span>
         </p>
       </div>
